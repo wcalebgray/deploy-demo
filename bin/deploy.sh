@@ -8,10 +8,18 @@
 # - Update service
 
 APP="deploy-demo"
-REPO="461781854431.dkr.ecr.us-west-2.amazonaws.com/$APP"
+URL="461781854431.dkr.ecr.us-west-2.amazonaws.com"
+CLUSTER="default"
+REPO="$URL/$APP"
 LOCAL_REPO="$APP"
 TASK="$APP"
-cluster="default"
+
+
+# exit on any error
+set -e
+
+# semver may be in node_modules
+PATH="$PATH:node_modules/.bin"
 
 # Check which branch I'm on and set environment based on branch
 if [ -z "$GIT_BRANCH" ]; then
@@ -62,7 +70,7 @@ new_containers=`echo "$current_containers" | sed "s~$REPO:[A-Za-z0-9._-]*~$image
 # create a new revision of the task family
 aws ecs register-task-definition --family $TASK --container-definitions "$new_containers" > /dev/null
 
-echo "Updating $TASK service of cluster: $cluster"
-aws ecs update-service --cluster $cluster --service $TASK --task-definition $TASK > /dev/null
+echo "Updating $TASK service of cluster: $CLUSTER"
+aws ecs update-service --cluster $CLUSTER --service $TASK --task-definition $TASK > /dev/null
 
 echo 'Finished'

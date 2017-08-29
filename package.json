@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "AWS_DEFAULT_PROFILE=augustine bin/deploy.sh",
+    "deploy": "sh bin/deploy.sh",
     "postversion": "git push && git push --tags"
   },
   "author": "Caleb Gray",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "semver": "^5.4.1"
+  }
 }
