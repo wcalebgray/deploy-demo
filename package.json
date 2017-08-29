@@ -1,0 +1,11 @@
+{
+  "name": "deploy-demo",
+  "version": "0.0.0",
+  "description": "a demo to figure out how git and sh work",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Caleb Gray",
+  "license": "MIT"
+}
